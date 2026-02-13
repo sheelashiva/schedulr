@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard - Schedulr</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+  <div class="nav">
+    <div class="brand">Schedulr <small>Smart Study Planner</small></div>
+    <div class="top-actions">
+      <div class="small">Hi, {{username}}</div>
+      <a class="btn secondary" href="/add-subject">Add Subjects</a>
+      <a class="btn secondary" href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="h1">Your Progress</div>
+      <div class="muted">Update “units completed” to track progress.</div>
+      <hr>
+      <div id="subjectsList" class="list"></div>
+    </div>
+  </div>
+</body>
+</html>

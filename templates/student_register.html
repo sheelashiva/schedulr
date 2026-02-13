@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Register - Schedulr</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="nav">
+    <div class="brand">Schedulr <small>Smart Study Planner</small></div>
+    <div class="top-actions">
+      <a class="btn secondary" href="/">Student Login</a>
+      <a class="btn secondary" href="/mentor/login">Mentor Login</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="h1">Create Student Account</div>
+      {% if error %}<div class="error">{{error}}</div>{% endif %}
+
+      <form method="POST" action="/register">
+        <label>Username</label>
+        <input name="username" placeholder="Choose a username" required>
+
+        <label>Password</label>
+        <input name="password" type="password" placeholder="Create password" required>
+
+        <label>Mentor Code (optional)</label>
+        <input name="mentor_code" placeholder="Example: MENTOR123">
+
+        <div style="margin-top:12px">
+          <button class="btn" type="submit">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

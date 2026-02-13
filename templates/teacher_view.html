@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>Progress View</h2>
+  <p class="muted">Student: <b>{{ student_name }}</b></p>
+
+  {% if subjects|length == 0 %}
+    <p class="muted">No subjects yet.</p>
+  {% else %}
+    <div class="list">
+      {% for s in subjects %}
+        <div class="item">
+          <div>
+            <div class="big">{{ s["name"] }}</div>
+            <div class="muted">
+              Exam: {{ s["exam_date"] }} • Difficulty: {{ s["difficulty"] }}
+            </div>
+            <div class="muted">
+              Units: {{ s["units_completed"] }}/{{ s["total_units"] }} • Hours studied: {{ s["hours_studied"] }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
