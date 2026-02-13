@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Schedulr - Smart Study Planner</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <!-- TOP HEADER (purple like your screenshot) -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">📚</div>
+      <div>
+        <h1>Schedulr</h1>
+        <p>Smart Study Planner</p>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn btn-light" onclick="generateShareLink()">Generate Teacher Link</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Teacher link box -->
+    <section class="card">
+      <div class="card-title">Teacher Link</div>
+      <div class="muted">Share this link with teacher to view progress.</div>
+      <div id="shareLink" class="linkbox">Click “Generate Teacher Link”</div>
+    </section>
+
+    <!-- 2 cards like screenshot: Time Allocation + Progress Overview -->
+    <section class="grid-2">
+      <div class="card">
+        <div class="card-title">Time Allocation</div>
+        <div class="chart-wrap">
+          <canvas id="timeChart"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Progress Overview</div>
+        <div class="chart-wrap">
+          <canvas id="progressChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Daily plan + subject progress (same screenshot layout) -->
+    <section class="grid-2">
+      <div class="card">
+        <div class="card-title">Daily Study Plan</div>
+        <div id="dailyPlan" class="list"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Subject Progress</div>
+        <div id="subjectProgress" class="list"></div>
+      </div>
+    </section>
+
+    <!-- Missed day section like screenshot -->
+    <section class="card">
+      <div class="card-title">Handle Missed Study Days</div>
+      <div class="muted">Select a missed date and redistribute hours.</div>
+
+      <div class="row">
+        <input id="missedDate" type="date" class="input" />
+        <input id="missedHours" type="number" class="input" placeholder="Hours missed" min="0" step="0.5"/>
+        <button class="btn" onclick="reportMissedDay()">Redistribute Hours</button>
+      </div>
+
+      <div id="missedMsg" class="muted"></div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

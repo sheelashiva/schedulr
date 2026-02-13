@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Subjects - Schedulr</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+  <div class="nav">
+    <div class="brand">Schedulr <small>Smart Study Planner</small></div>
+    <div class="top-actions">
+      <div class="small">Hi, {{username}}</div>
+      <a class="btn secondary" href="/dashboard">Dashboard</a>
+      <a class="btn secondary" href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="h1">Add Subject & Exam Details</div>
+      <div id="msg"></div>
+
+      <div class="row">
+        <div class="col">
+          <label>Subject name</label>
+          <input id="subName" placeholder="Eg: Chemistry">
+        </div>
+        <div class="col">
+          <label>Exam date</label>
+          <input id="examDate" type="date">
+        </div>
+        <div class="col">
+          <label>Total units</label>
+          <input id="totalUnits" type="number" min="1" value="5">
+        </div>
+        <div class="col">
+          <label>Difficulty</label>
+          <select id="difficulty">
+            <option>Easy</option>
+            <option selected>Medium</option>
+            <option>Hard</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <button class="btn" onclick="addSubjectFromForm()">Add Subject</button>
+      </div>
+
+      <hr>
+      <div class="h1" style="font-size:18px">Added Subjects</div>
+      <div id="subjectsList" class="list"></div>
+    </div>
+  </div>
+</body>
+</html>

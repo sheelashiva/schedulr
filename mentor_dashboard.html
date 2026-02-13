@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Mentor Dashboard - Schedulr</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="nav">
+    <div class="brand">Schedulr <small>Mentor Panel</small></div>
+    <div class="top-actions">
+      <div class="small">Hi, {{mentor_name}}</div>
+      <a class="btn secondary" href="/mentor/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="h1">Students Progress</div>
+      <div class="muted">Shows only students who registered using your mentor code.</div>
+      <hr>
+      <div id="mentorBox" class="list"></div>
+    </div>
+  </div>
+
+  <script>
+    async function loadMentor(){
+      const res = await fetch("/mentor/api/students");
+      const data = await res.json();
+      const box = document.getElementById("mentorBox");
+      const students = data.students || [];
+
+      if(students.length === 0){
+        box.innerHTML = `<div class="item small">No students linked yet.</div>`;
+        return;
+      }
+
+      box.innerHTML = students.map(x=>{
+        const s = x.student;
+        const subs = x.subjects || [];
+        return `
+          <div class="item">
+            <b>Student:</b> ${s.username}
+            <div class="small">${subs.length} subject(s)</div>
+            <div style="margin-top:10px">
+              ${subs.map(sb=>{
+                const p = sb.total_units ? Math.round((sb.units_completed/sb.total_units)*100) : 0;
+                return `
+                  <div class="item" style="margin:8px 0;background:rgba(255,255,255,.05)">
+                    <b>${sb.name}</b>
+                    <div class="small">Units: ${sb.units_completed}/${sb.total_units} • ${p}% • Exam: ${sb.exam_date}</div>
+                    <div class="progressbar"><div style="width:${p}%"></div></div>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", loadMentor);
+  </script>
+</body>
+</html>
